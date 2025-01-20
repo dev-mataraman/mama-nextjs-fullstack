@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 const queryFn = async () => {
 	try {
 		const client = await ApiClient();
-		const r = await client.api.main.health.$get();
+		const r = await client?.api.main.health.$get();
 		if (!r.ok) {
 			const err: ErrorResponse = await r.json();
 			const error = OnError(err);
