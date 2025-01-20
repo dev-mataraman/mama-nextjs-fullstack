@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ENV } from "@/configs/environment";
+import AppLayout from "@/interfaces/layouts/app.layout";
+import { ProviderReduxToolkit } from "@/providers/redux.provider";
+import { ProviderTanstack } from "@/providers/tanstack.provider";
+import NextTopLoader from "nextjs-toploader";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -27,7 +32,16 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				{children}
+				<NextTopLoader
+					height={2}
+					color={ENV.LOADER_COLOR}
+					showSpinner={false}
+				/>
+				<ProviderReduxToolkit>
+					<ProviderTanstack>
+						<AppLayout>{children}</AppLayout>
+					</ProviderTanstack>
+				</ProviderReduxToolkit>
 			</body>
 		</html>
 	);
