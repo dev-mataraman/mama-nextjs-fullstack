@@ -8,8 +8,6 @@ const ExController = (c: Context) => {
 		results: {},
 	});
 };
-const ex = new Hono()
-    .get("/ex", ExController)
-    .post("/ex", ExController);
+const ex = new Hono().get("/ex", ExController).post("/ex", ExController);
 
-export default ex
+export default ex;

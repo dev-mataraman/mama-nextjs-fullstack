@@ -1,6 +1,6 @@
-'use client';
+"use client";
 import type React from "react";
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import "@tensorflow/tfjs";
 import "@tensorflow/tfjs-backend-webgl";
 import "@mediapipe/face_mesh";
@@ -8,8 +8,8 @@ import Webcam from "react-webcam";
 import { runDetector } from "./utils/detector";
 
 const inputResolution = {
-	width: 1280,  // Standard 720p width
-	height: 720,  // Standard 720p height
+	width: 1280, // Standard 720p width
+	height: 1000, // Standard 720p height
 };
 
 const videoConstraints = {
@@ -44,11 +44,13 @@ function ScreenMain() {
 		};
 
 		updateDimensions();
-		window.addEventListener('resize', updateDimensions);
-		return () => window.removeEventListener('resize', updateDimensions);
+		window.addEventListener("resize", updateDimensions);
+		return () => window.removeEventListener("resize", updateDimensions);
 	}, []);
 
-	const handleVideoLoad = (videoNode: React.SyntheticEvent<HTMLVideoElement>) => {
+	const handleVideoLoad = (
+		videoNode: React.SyntheticEvent<HTMLVideoElement>,
+	) => {
 		const video = videoNode.target as HTMLVideoElement;
 		if (video.readyState !== 4) return;
 		if (loaded) return;
